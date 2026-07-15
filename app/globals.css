@@ -155,6 +155,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
+  cursor: url("/cursor-default.svg") 10 10, auto;
   background:
     radial-gradient(circle at 12% 8%, rgba(var(--accent-rgb), 0.11), transparent 32%),
     radial-gradient(circle at 88% 14%, rgba(var(--accent-2-rgb), 0.08), transparent 30%),
@@ -197,6 +198,22 @@ input,
 textarea,
 select {
   font-family: var(--font-body);
+}
+
+a,
+button,
+select,
+summary,
+label[for],
+[role="button"],
+[role="link"] {
+  cursor: url("/cursor-pointer.svg") 12 12, pointer;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  cursor: text;
 }
 
 ::selection {
