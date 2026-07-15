@@ -2,7 +2,27 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import {
+  BriefcaseBusiness,
+  FolderKanban,
+  GraduationCap,
+  Home,
+  Layers3,
+  Send,
+  UserRound,
+  type LucideIcon,
+} from "lucide-react";
 import { navItems } from "@/lib/data";
+
+const sectionIcons: Record<string, LucideIcon> = {
+  home: Home,
+  about: UserRound,
+  skills: Layers3,
+  experience: BriefcaseBusiness,
+  projects: FolderKanban,
+  education: GraduationCap,
+  contact: Send,
+};
 
 export default function SectionRail() {
   const [activeSection, setActiveSection] = useState("home");
@@ -37,13 +57,14 @@ export default function SectionRail() {
       aria-label="Section navigation"
       className="section-rail"
     >
-      {items.map((item, index) => {
+      {items.map((item) => {
         const id = item.href.slice(1);
         const active = activeSection === id;
+        const Icon = sectionIcons[id];
         return (
           <a key={item.href} href={item.href} className={`section-rail-link ${active ? "is-active" : ""}`} aria-label={`Go to ${item.label}`}>
             <span className="section-rail-label">{item.label}</span>
-            <span className="section-rail-index">{String(index).padStart(2, "0")}</span>
+            <Icon className="section-rail-icon" aria-hidden="true" strokeWidth={1.8} />
             <span className="section-rail-dot" />
           </a>
         );
