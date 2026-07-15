@@ -20,8 +20,7 @@ export const owner = {
   phone: "+91 9301479635",
   github: "https://github.com/shubhamvdev",
   linkedin: "https://www.linkedin.com/in/devshubhamvsv",
-  resume:
-    "https://drive.google.com/file/d/1CxX2CAFBQO6Tiur7Z2BTf7xGe51e3eYy/view?usp=sharing",
+  resume: "/assests/Shubham%20Vishwakarma%20-%20FE%203%20Years.pdf",
 };
 
 export const navItems = [
