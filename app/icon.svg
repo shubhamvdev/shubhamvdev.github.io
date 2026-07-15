@@ -1,0 +1,16 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="favicon-gradient" x1="9" y1="7" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E2E8F0"/>
+      <stop offset="0.55" stop-color="#38BDF8"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <filter id="favicon-glow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <rect x="3" y="3" width="58" height="58" rx="17" fill="#0B0D12" stroke="url(#favicon-gradient)" stroke-width="2"/>
+  <path d="M43 19C40.4 16.4 36.7 15 32.5 15C25.7 15 20.8 18.5 20.8 23.6C20.8 29 25.1 31.3 32.1 32.9C37.4 34.1 39.2 35.2 39.2 37.4C39.2 39.7 36.8 41.2 33 41.2C28.9 41.2 25.3 39.6 22.5 36.8L18.7 41.7C22.4 45.2 27.2 47.1 32.8 47.1C40.4 47.1 45.7 43.4 45.7 37.3C45.7 32 41.9 29.6 34.5 27.8C29 26.4 27 25.6 27 23.3C27 21.4 29 20.2 32.3 20.2C35.6 20.2 38.4 21.5 40.8 23.6L43 19Z" fill="url(#favicon-gradient)" filter="url(#favicon-glow)"/>
+</svg>
