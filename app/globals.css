@@ -142,6 +142,19 @@
   transition: opacity 180ms ease, width 220ms ease, height 220ms ease, border-color 220ms ease, background 220ms ease;
 }
 
+.smooth-scroll-progress {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 9998;
+  height: 2px;
+  pointer-events: none;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.7);
+}
+
 .animated-cursor-dot {
   width: 7px;
   height: 7px;
@@ -216,7 +229,8 @@
 
 @media (pointer: coarse), (prefers-reduced-motion: reduce) {
   .animated-cursor-dot,
-  .animated-cursor-ring {
+  .animated-cursor-ring,
+  .smooth-scroll-progress {
     display: none;
   }
 }
@@ -328,6 +342,7 @@ select {
   width: 100%;
   aspect-ratio: 1;
   isolation: isolate;
+  transform-style: preserve-3d;
 }
 
 .hero-orbit-stage::before {
@@ -390,7 +405,7 @@ select {
   overflow: hidden;
   border: 2px solid rgba(var(--accent-rgb), 0.44);
   border-radius: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) translateZ(32px);
   background: var(--surface-deep);
   box-shadow:
     0 35px 90px rgba(0, 0, 0, 0.48),
@@ -460,6 +475,7 @@ select {
   font-size: 11px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(16px);
+  transform: translateZ(72px);
 }
 
 .hero-code-card span {
@@ -496,7 +512,7 @@ select {
     right: 50%;
     bottom: 0;
     min-width: 235px;
-    transform: translateX(50%);
+    transform: translateX(50%) translateZ(40px);
     font-size: 9px;
   }
 }

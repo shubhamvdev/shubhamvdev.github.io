@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Mail } from "lucide-react";
 import { owner, stats } from "@/lib/data";
@@ -36,8 +37,37 @@ const nameLetter: Variants = {
 };
 
 export default function Hero() {
+  const heroRef = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion();
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const rotateX = useSpring(pointerY, { stiffness: 120, damping: 18, mass: 0.45 });
+  const rotateY = useSpring(pointerX, { stiffness: 120, damping: 18, mass: 0.45 });
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
+  });
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 70]);
+  const portraitY = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 125]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.82], [1, 0.28]);
+
+  const handlePortraitMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "touch" || reduceMotion) return;
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+    pointerX.set(x * 8);
+    pointerY.set(y * -8);
+  };
+
+  const resetPortrait = () => {
+    pointerX.set(0);
+    pointerY.set(0);
+  };
+
   return (
     <section
+      ref={heroRef}
       id="home"
       className="relative z-10 flex min-h-screen items-center overflow-hidden px-4 pb-20 pt-28 sm:px-6 lg:px-8 lg:pt-24"
     >
@@ -53,7 +83,7 @@ export default function Hero() {
       />
 
       <div className="relative mx-auto grid w-full max-w-7xl items-center gap-16 lg:grid-cols-[1.08fr_0.92fr] lg:gap-10">
-        <motion.div variants={container} initial="hidden" animate="show" className="text-center lg:text-left">
+        <motion.div variants={container} initial="hidden" animate="show" style={{ y: contentY, opacity: heroOpacity }} className="text-center lg:text-left">
           <motion.div variants={item} className="theme-accent-surface mb-7 inline-flex items-center gap-3 rounded-full border px-4 py-2 text-xs font-medium text-slate-300">
             <span className="h-2 w-2 rounded-full bg-[var(--accent)] shadow-[0_0_12px_rgba(var(--accent-rgb),0.9)]" />
             Available for new opportunities
@@ -105,7 +135,15 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.85, delay: 0.25, ease: easeOutExpo }} className="relative mx-auto w-full max-w-[520px]">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.85, delay: 0.25, ease: easeOutExpo }}
+          onPointerMove={handlePortraitMove}
+          onPointerLeave={resetPortrait}
+          style={{ y: portraitY, opacity: heroOpacity, rotateX, rotateY, transformPerspective: 1100 }}
+          className="relative mx-auto w-full max-w-[520px] transform-gpu"
+        >
           <div className="hero-orbit-stage">
             <div className="hero-orbit-ring hero-orbit-ring-one" />
             <div className="hero-orbit-ring hero-orbit-ring-two" />
