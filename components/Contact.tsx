@@ -36,7 +36,7 @@ export default function Contact() {
         >
           <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
             <div className="relative overflow-hidden border-b border-white/10 p-7 sm:p-10 lg:border-b-0 lg:border-r lg:p-12">
-              <span className="absolute -bottom-16 -left-8 text-[12rem] font-black leading-none text-white/[0.025]">HI</span>
+              <span className="pointer-events-none absolute -bottom-16 -left-8 text-[12rem] font-black leading-none text-white/[0.025]" aria-hidden="true">HI</span>
               <p className="theme-accent-text relative text-sm font-semibold uppercase tracking-[0.22em]">
                 Reach out
               </p>
@@ -46,7 +46,7 @@ export default function Contact() {
                 reliable integrations, and fast product delivery.
               </p>
 
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="relative z-10 mt-8 flex flex-wrap gap-3">
                 {socialItems.map((item) => {
                   const Icon = item.icon;
                   return (
