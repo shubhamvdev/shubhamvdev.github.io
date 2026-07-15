@@ -22,23 +22,17 @@ const item: Variants = {
 
 const nameLetter: Variants = {
   hidden: { opacity: 0, y: 22, scale: 0.86, filter: "blur(9px)" },
-  show: (index: number) => {
-    const revealStart = 0.05 + index * 0.035;
-    const revealEnd = revealStart + 0.045;
-
-    return {
-      opacity: [0, 0, 1, 1, 0],
-      y: [22, 22, 0, 0, -8],
-      scale: [0.86, 0.86, 1, 1, 0.98],
-      filter: ["blur(9px)", "blur(9px)", "blur(0px)", "blur(0px)", "blur(5px)"],
-      transition: {
-        duration: 6.5,
-        times: [0, revealStart, revealEnd, 0.84, 0.92],
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    };
-  }
+  show: (index: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.48,
+      delay: 0.12 + index * 0.085,
+      ease: easeOutExpo
+    }
+  })
 };
 
 export default function Hero() {
