@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import AnimatedCursor from "@/components/AnimatedCursor";
 import SmoothMotion from "@/components/SmoothMotion";
 import "./globals.css";
 
@@ -23,7 +22,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased" suppressHydrationWarning>
-        <AnimatedCursor />
         <SmoothMotion />
         {children}
       </body>
