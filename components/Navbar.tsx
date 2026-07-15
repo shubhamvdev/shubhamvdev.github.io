@@ -17,7 +17,12 @@ export default function Navbar() {
     { id: "midnight", label: "Midnight", colors: ["#3b82f6", "#06b6d4"] },
     { id: "aurora", label: "Aurora", colors: ["#a855f7", "#ec4899"] },
     { id: "forest", label: "Forest", colors: ["#14b8a6", "#84cc16"] },
-    { id: "ember", label: "Ember", colors: ["#f97316", "#f43f5e"] }
+    { id: "ember", label: "Ember", colors: ["#f97316", "#f43f5e"] },
+    { id: "ocean", label: "Ocean", colors: ["#06b6d4", "#3b82f6"] },
+    { id: "cyber", label: "Cyber", colors: ["#22c55e", "#eab308"] },
+    { id: "rose", label: "Rose", colors: ["#f43f5e", "#d946ef"] },
+    { id: "solar", label: "Solar", colors: ["#f59e0b", "#ef4444"] },
+    { id: "mono", label: "Monochrome", colors: ["#e2e8f0", "#64748b"] }
   ];
 
   useEffect(() => {
@@ -102,7 +107,7 @@ export default function Navbar() {
               <motion.div
                 initial={{ opacity: 0, y: -6, scale: 0.97 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                className="theme-menu absolute right-0 top-11 z-50 w-48 overflow-hidden rounded-2xl border border-white/10 p-2 shadow-2xl"
+                className="theme-menu absolute right-0 top-11 z-50 max-h-[72vh] w-52 overflow-y-auto rounded-2xl border border-white/10 p-2 shadow-2xl"
               >
                 <p className="px-3 pb-2 pt-1 text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">Choose theme</p>
                 {themes.map((item) => (
