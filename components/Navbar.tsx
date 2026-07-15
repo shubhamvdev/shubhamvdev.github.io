@@ -3,12 +3,13 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { ArrowUpRight, Check, Mail, Palette } from "lucide-react";
+import { ArrowUpRight, Check, Mail, Menu, Palette, X } from "lucide-react";
 import { navItems, owner } from "@/lib/data";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [themeMenuOpen, setThemeMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState("obsidian");
 
   const themes = [
@@ -66,7 +67,7 @@ export default function Navbar() {
             width={214}
             height={56}
             priority
-            className="h-8 w-auto transition duration-300 group-hover:scale-[1.03]"
+            className="h-7 w-auto transition duration-300 group-hover:scale-[1.03] sm:h-8"
           />
         </a>
 
@@ -88,7 +89,10 @@ export default function Navbar() {
               type="button"
               aria-label="Choose color theme"
               aria-expanded={themeMenuOpen}
-              onClick={() => setThemeMenuOpen((open) => !open)}
+              onClick={() => {
+                setThemeMenuOpen((open) => !open);
+                setMobileMenuOpen(false);
+              }}
               className="theme-picker-button grid h-8 w-8 place-items-center rounded-full border border-white/10 bg-white/[0.04] text-slate-300 transition hover:bg-white/10 hover:text-white"
             >
               <Palette size={15} />
@@ -133,13 +137,67 @@ export default function Navbar() {
           <a
             aria-label="Email"
             href={`mailto:${owner.email}`}
-            className="theme-cta inline-flex h-8 items-center gap-1.5 rounded-full px-3 text-xs font-bold text-slate-950 transition hover:scale-[1.03]"
+            className="theme-cta hidden h-8 items-center gap-1.5 rounded-full px-3 text-xs font-bold text-slate-950 transition hover:scale-[1.03] sm:inline-flex"
           >
             <Mail size={18} />
             <span className="hidden sm:inline">Let&apos;s talk</span>
           </a>
+          <button
+            type="button"
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileMenuOpen}
+            onClick={() => {
+              setMobileMenuOpen((open) => !open);
+              setThemeMenuOpen(false);
+            }}
+            className="theme-accent-surface relative z-50 inline-flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-full border px-3 text-xs font-bold text-white shadow-lg transition hover:scale-105 lg:hidden"
+          >
+            {mobileMenuOpen ? <X size={18} strokeWidth={2.4} /> : <Menu size={18} strokeWidth={2.4} />}
+            <span>{mobileMenuOpen ? "Close" : "Menu"}</span>
+          </button>
         </div>
       </nav>
+
+      {mobileMenuOpen ? (
+        <motion.div
+          initial={{ opacity: 0, y: -8, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          className="theme-menu absolute left-0 right-0 top-[4.15rem] z-50 rounded-2xl border border-white/10 p-3 shadow-2xl lg:hidden"
+        >
+          <div className="grid grid-cols-2 gap-1">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-300 transition hover:bg-white/[0.07] hover:text-white"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+          <div className="mt-3 grid gap-2 border-t border-white/10 pt-3 sm:grid-cols-2">
+            <a
+              href={owner.resume}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-bold text-white"
+            >
+              View résumé
+              <ArrowUpRight size={16} />
+            </a>
+            <a
+              href={`mailto:${owner.email}`}
+              onClick={() => setMobileMenuOpen(false)}
+              className="primary-button inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold text-white"
+            >
+              Contact me
+              <Mail size={16} />
+            </a>
+          </div>
+        </motion.div>
+      ) : null}
     </motion.header>
   );
 }
