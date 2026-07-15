@@ -65,7 +65,7 @@ export const experience = [
   {
     role: "Junior Full Stack Developer",
     company: "NewTechFusion CyberTech Pvt Ltd",
-    period: "Feb 2023 - Dec 2025",
+    period: "Feb 2023 - Jan 2025",
     location: "Indore",
     description:
       "Delivered full stack features across React, Next.js, APIs, authentication, real-time updates, and operational SaaS products.",

@@ -7,7 +7,7 @@ import SectionTitle from "./SectionTitle";
 
 export default function Projects() {
   return (
-    <section id="projects" className="relative z-10 px-4 py-24 sm:px-6 lg:px-8">
+    <section id="projects" className="section-shell relative z-10 px-4 py-28 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionTitle
           eyebrow="Projects"
@@ -15,7 +15,7 @@ export default function Projects() {
           description="SaaS platforms, healthcare tools, lab operations, tenant management, and real-time debate workflows."
         />
 
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="overflow-hidden border-y border-white/10">
           {projects.map((project, index) => {
             const Icon = project.icon;
             return (
@@ -25,8 +25,7 @@ export default function Projects() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.55, delay: index * 0.06 }}
-                whileHover={{ y: -10, scale: 1.015 }}
-                className="glass-card group relative flex min-h-[300px] flex-col rounded-2xl p-6 transition-shadow hover:shadow-card-hover"
+                className="project-row group relative grid gap-5 border-b border-white/10 py-8 last:border-b-0 md:grid-cols-[72px_0.55fr_1fr_auto] md:items-center md:gap-8"
               >
                 {project.url ? (
                   <a
@@ -34,36 +33,31 @@ export default function Projects() {
                     href={project.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="absolute inset-0 z-10 rounded-2xl"
+                    className="absolute inset-0 z-10"
                   />
                 ) : null}
-                <div className="flex items-start justify-between gap-4">
-                  <div className="grid h-14 w-14 place-items-center rounded-xl bg-gradient-to-br from-cyan-300/20 to-violet-400/20 p-3 text-cyan-100 ring-1 ring-white/10">
-                    <Icon size={28} />
+                <div className="flex items-center gap-4 md:block">
+                  <span className="text-xs font-bold tracking-[0.2em] text-white/25">{String(index + 1).padStart(2, "0")}</span>
+                  <div className="theme-accent-surface mt-0 grid h-11 w-11 place-items-center rounded-full border md:mt-4">
+                    <Icon size={20} />
                   </div>
-                  <ArrowUpRight
-                    size={22}
-                    className={`transition ${
-                      project.url
-                        ? "text-slate-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-cyan-200"
-                        : "text-slate-700"
-                    }`}
-                  />
                 </div>
 
-                <h3 className="mt-6 text-2xl font-black text-white">{project.title}</h3>
-                <p className="mt-4 flex-1 leading-7 text-slate-300">{project.description}</p>
-
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-md border border-white/10 bg-white/[0.06] px-3 py-1.5 text-xs font-semibold text-slate-300"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                <div>
+                  <h3 className="text-2xl font-black text-white transition group-hover:opacity-80 sm:text-3xl">{project.title}</h3>
+                  <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="text-xs font-semibold uppercase tracking-wider text-slate-500">{tag}</span>
+                    ))}
+                  </div>
                 </div>
+
+                <p className="max-w-2xl leading-7 text-slate-400">{project.description}</p>
+
+                <ArrowUpRight
+                  size={24}
+                  className={`hidden transition md:block ${project.url ? "text-slate-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white" : "text-slate-800"}`}
+                />
               </motion.article>
             );
           })}

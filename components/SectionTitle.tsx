@@ -15,17 +15,18 @@ export default function SectionTitle({ eyebrow, title, description }: SectionTit
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="mx-auto mb-12 max-w-3xl text-center"
+      className="section-heading mb-12 grid gap-5 lg:grid-cols-[0.32fr_1fr] lg:items-end"
     >
-      <p className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-cyan-300">
-        {eyebrow}
-      </p>
-      <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">{title}</h2>
-      {description ? (
-        <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
-          {description}
-        </p>
-      ) : null}
+      <div className="flex items-center gap-3 lg:self-start">
+        <span className="theme-gradient-bar h-px w-10" />
+        <p className="theme-accent-text text-xs font-bold uppercase tracking-[0.28em]">{eyebrow}</p>
+      </div>
+      <div>
+        <h2 className="max-w-4xl text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-[3.35rem]">{title}</h2>
+        {description ? (
+          <p className="mt-5 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg">{description}</p>
+        ) : null}
+      </div>
     </motion.div>
   );
 }

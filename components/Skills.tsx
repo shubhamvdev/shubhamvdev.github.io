@@ -11,7 +11,7 @@ const badgeVariants = {
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative z-10 px-4 py-24 sm:px-6 lg:px-8">
+    <section id="skills" className="section-shell relative z-10 px-4 py-28 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionTitle
           eyebrow="Skills"
@@ -27,17 +27,18 @@ export default function Skills() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
-          className="glass-card flex flex-wrap justify-center gap-3 rounded-2xl p-5 sm:p-8"
+          className="flex flex-wrap gap-3"
         >
-          {skills.map((skill) => (
+          {skills.map((skill, index) => (
             <motion.span
               key={skill}
               variants={badgeVariants}
               transition={{ duration: 0.45, ease: "easeOut" }}
               whileHover={{ y: -5, scale: 1.04 }}
-              className="rounded-lg border border-white/10 bg-white/[0.07] px-4 py-3 text-sm font-semibold text-slate-100 shadow-lg shadow-slate-950/20 transition hover:border-cyan-300/40 hover:bg-cyan-300/10"
+              className="theme-hover group inline-flex items-center gap-4 rounded-full border border-white/10 bg-white/[0.025] px-5 py-3 text-sm font-semibold text-slate-300 transition hover:text-white"
             >
-              {skill}
+              <span>{skill}</span>
+              <span className="text-[9px] font-bold text-slate-600 transition group-hover:text-white">{String(index + 1).padStart(2, "0")}</span>
             </motion.span>
           ))}
         </motion.div>

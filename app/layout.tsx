@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import AnimatedCursor from "@/components/AnimatedCursor";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -21,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased" suppressHydrationWarning>
+        <AnimatedCursor />
         {children}
       </body>
     </html>
