@@ -1,25 +1,45 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Code2, Mail, Network } from "lucide-react";
 import { navItems, owner } from "@/lib/data";
 
 export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const updateNavbar = () => setIsScrolled(window.scrollY > 24);
+
+    updateNavbar();
+    window.addEventListener("scroll", updateNavbar, { passive: true });
+    return () => window.removeEventListener("scroll", updateNavbar);
+  }, []);
+
   return (
     <motion.header
       initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.55, ease: "easeOut" }}
-      className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-slate-950/55 backdrop-blur-2xl"
+      className={`liquid-nav fixed left-3 right-3 top-3 z-50 rounded-2xl sm:left-5 sm:right-5 lg:mx-auto lg:max-w-7xl ${
+        isScrolled ? "liquid-nav-scrolled" : "liquid-nav-top"
+      }`}
     >
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#home" className="group flex items-center gap-3">
-          <span className="grid h-10 w-10 place-items-center rounded-lg bg-white/10 text-sm font-black text-white ring-1 ring-white/15 transition group-hover:bg-cyan-400/20">
-            SV
-          </span>
-          <span className="hidden text-sm font-semibold text-white sm:block">
-            Shubham Vishwakarma
-          </span>
+      <nav className="relative z-10 mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <a
+          href="#home"
+          aria-label="Shubham Vishwakarma — home"
+          className="group flex items-center rounded-xl transition duration-300 hover:drop-shadow-[0_0_12px_rgba(34,211,238,0.35)]"
+        >
+          <Image
+            src="/shubham-logo.svg"
+            alt="Shubham"
+            width={214}
+            height={56}
+            priority
+            className="h-11 w-auto transition duration-300 group-hover:scale-[1.03]"
+          />
         </a>
 
         <div className="hidden items-center gap-1 lg:flex">

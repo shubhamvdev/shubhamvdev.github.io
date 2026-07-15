@@ -65,10 +65,42 @@ select {
 }
 
 .bg-radial-fade {
+  position: relative;
+  isolation: isolate;
   background-image:
-    radial-gradient(circle at top left, rgba(59, 130, 246, 0.28), transparent 34%),
-    radial-gradient(circle at top right, rgba(168, 85, 247, 0.22), transparent 28%),
-    linear-gradient(135deg, #020617 0%, #08111f 48%, #0f0721 100%);
+    radial-gradient(circle at 8% 12%, rgba(34, 211, 238, 0.22), transparent 28%),
+    radial-gradient(circle at 88% 10%, rgba(139, 92, 246, 0.24), transparent 30%),
+    radial-gradient(circle at 50% 56%, rgba(37, 99, 235, 0.12), transparent 38%),
+    linear-gradient(135deg, #020617 0%, #06152a 46%, #120725 100%);
+  background-size: 120% 120%, 125% 125%, 115% 115%, 100% 100%;
+  animation: background-drift 18s ease-in-out infinite alternate;
+}
+
+.bg-radial-fade::before,
+.bg-radial-fade::after {
+  content: "";
+  position: fixed;
+  z-index: 0;
+  width: min(48vw, 680px);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  pointer-events: none;
+  filter: blur(90px);
+  will-change: transform;
+}
+
+.bg-radial-fade::before {
+  left: -14vw;
+  top: 18vh;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.2), rgba(37, 99, 235, 0.08) 48%, transparent 70%);
+  animation: aurora-float-left 16s ease-in-out infinite alternate;
+}
+
+.bg-radial-fade::after {
+  right: -16vw;
+  top: 42vh;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.22), rgba(236, 72, 153, 0.07) 48%, transparent 70%);
+  animation: aurora-float-right 19s ease-in-out infinite alternate;
 }
 
 .shadow-glow {
@@ -80,10 +112,12 @@ select {
 }
 
 .gradient-text {
-  background: linear-gradient(90deg, #93c5fd, #c4b5fd, #67e8f9);
+  background: linear-gradient(100deg, #67e8f9 0%, #60a5fa 32%, #c4b5fd 66%, #22d3ee 100%);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: gradient-flow 6s linear infinite;
 }
 
 .soft-grid {
@@ -92,4 +126,177 @@ select {
     linear-gradient(90deg, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: linear-gradient(to bottom, black, transparent 78%);
+  animation: grid-drift 24s linear infinite;
+}
+
+.liquid-nav {
+  overflow: hidden;
+  border: 1px solid transparent;
+  transition:
+    background 450ms ease,
+    border-color 450ms ease,
+    box-shadow 450ms ease,
+    backdrop-filter 450ms ease,
+    top 450ms ease;
+}
+
+.liquid-nav-top {
+  background: rgba(2, 6, 23, 0.2);
+  border-color: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
+}
+
+.liquid-nav-scrolled {
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.035) 42%, rgba(103, 232, 249, 0.07)),
+    rgba(3, 9, 24, 0.68);
+  border-color: rgba(186, 230, 253, 0.2);
+  box-shadow:
+    0 18px 55px rgba(2, 6, 23, 0.46),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1px 0 rgba(103, 232, 249, 0.05);
+  backdrop-filter: blur(24px) saturate(155%);
+}
+
+.liquid-nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(105deg, transparent 20%, rgba(255, 255, 255, 0.11) 45%, transparent 70%);
+  transform: translateX(-110%);
+}
+
+.liquid-nav-scrolled::before {
+  opacity: 1;
+  animation: liquid-reflection 7s ease-in-out infinite;
+}
+
+.liquid-nav::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: -1px;
+  height: 1px;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent, rgba(103, 232, 249, 0.6), rgba(196, 181, 253, 0.5), transparent);
+  transition: opacity 450ms ease;
+}
+
+.liquid-nav-scrolled::after {
+  opacity: 1;
+}
+
+.portrait-aura {
+  border-radius: 999px;
+  background: conic-gradient(from 90deg, rgba(34, 211, 238, 0.55), rgba(59, 130, 246, 0.2), rgba(168, 85, 247, 0.52), rgba(34, 211, 238, 0.55));
+  animation: aura-pulse 6s ease-in-out infinite;
+}
+
+.portrait-shell {
+  isolation: isolate;
+  box-shadow:
+    0 24px 80px rgba(2, 6, 23, 0.58),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.portrait-ring {
+  z-index: -1;
+  background: conic-gradient(from 0deg, transparent 0 20%, #22d3ee 28%, transparent 38% 60%, #8b5cf6 70%, transparent 80%);
+  animation: ring-spin 9s linear infinite;
+}
+
+.portrait-image {
+  animation: portrait-breathe 9s ease-in-out infinite;
+}
+
+.portrait-shine {
+  left: -55%;
+  transform: skewX(-18deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+  animation: shine-sweep 5.5s ease-in-out infinite;
+}
+
+.portrait-orbit-dot {
+  z-index: 40;
+  animation: dot-float 3.8s ease-in-out infinite;
+}
+
+.portrait-orbit-dot-delayed {
+  animation-delay: -1.9s;
+}
+
+@keyframes background-drift {
+  to { background-position: 8% 5%, 92% 4%, 48% 62%, 0 0; }
+}
+
+@keyframes aurora-float-left {
+  0% { transform: translate3d(0, 0, 0) scale(0.9); }
+  50% { transform: translate3d(28vw, 18vh, 0) scale(1.12); }
+  100% { transform: translate3d(12vw, 52vh, 0) scale(0.96); }
+}
+
+@keyframes aurora-float-right {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-26vw, 20vh, 0) scale(0.88); }
+  100% { transform: translate3d(-10vw, -24vh, 0) scale(1.08); }
+}
+
+@keyframes grid-drift {
+  to { background-position: 56px 56px; }
+}
+
+@keyframes liquid-reflection {
+  0%, 30% { transform: translateX(-110%); }
+  65%, 100% { transform: translateX(110%); }
+}
+
+@keyframes gradient-flow {
+  to { background-position: 200% center; }
+}
+
+@keyframes aura-pulse {
+  0%, 100% { transform: scale(0.94) rotate(-3deg); opacity: 0.5; }
+  50% { transform: scale(1.05) rotate(3deg); opacity: 0.82; }
+}
+
+@keyframes ring-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes portrait-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.045); }
+}
+
+@keyframes shine-sweep {
+  0%, 25% { left: -55%; opacity: 0; }
+  40% { opacity: 1; }
+  65%, 100% { left: 125%; opacity: 0; }
+}
+
+@keyframes dot-float {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(5px, -10px, 0) scale(1.2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-radial-fade,
+  .bg-radial-fade::before,
+  .bg-radial-fade::after,
+  .soft-grid,
+  .gradient-text,
+  .portrait-aura,
+  .portrait-ring,
+  .portrait-image,
+  .portrait-shine,
+  .portrait-orbit-dot {
+    animation: none;
+  }
+
+  .liquid-nav-scrolled::before {
+    animation: none;
+  }
 }

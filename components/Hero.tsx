@@ -130,10 +130,36 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.92, rotateX: 8 }}
           animate={{ opacity: 1, scale: 1, rotateX: 0 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          className="relative"
+          className="relative mx-auto w-full max-w-xl"
         >
-          <div className="glass-card relative overflow-hidden rounded-2xl p-6">
+          <div className="portrait-aura pointer-events-none absolute -inset-10 opacity-70 blur-3xl" />
+          <div className="glass-card relative overflow-hidden rounded-[2rem] p-5 sm:p-6">
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/70 to-transparent" />
+            <div className="portrait-shell relative mx-auto mb-7 aspect-[4/3] w-full max-w-md overflow-hidden rounded-[1.6rem] border border-white/15 bg-slate-950/70 p-2 shadow-2xl shadow-cyan-950/40">
+              <div className="portrait-ring pointer-events-none absolute -inset-24" />
+              <div className="relative h-full overflow-hidden rounded-[1.15rem] bg-gradient-to-br from-cyan-400/20 via-blue-500/10 to-violet-500/25">
+                <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+                  <img
+                    src="/shubham-logo.svg"
+                    alt=""
+                    className="w-3/5 max-w-[240px] drop-shadow-[0_0_22px_rgba(34,211,238,0.24)]"
+                  />
+                </div>
+                <img
+                  src="/shubham-portfolio.jpeg"
+                  alt="Shubham Vishwakarma"
+                  className="portrait-image relative z-10 h-full w-full object-cover object-center"
+                  onError={(event) => {
+                    event.currentTarget.style.display = "none";
+                  }}
+                />
+                <div className="pointer-events-none absolute inset-0 z-20 bg-gradient-to-t from-slate-950/55 via-transparent to-cyan-300/10" />
+                <div className="portrait-shine pointer-events-none absolute inset-y-0 z-30 w-1/3" />
+              </div>
+              <span className="portrait-orbit-dot absolute left-[8%] top-[12%] h-3 w-3 rounded-full bg-cyan-300 shadow-[0_0_22px_rgba(103,232,249,0.95)]" />
+              <span className="portrait-orbit-dot portrait-orbit-dot-delayed absolute bottom-[10%] right-[7%] h-2.5 w-2.5 rounded-full bg-violet-300 shadow-[0_0_22px_rgba(196,181,253,0.95)]" />
+            </div>
+
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-slate-400">Availability</p>
