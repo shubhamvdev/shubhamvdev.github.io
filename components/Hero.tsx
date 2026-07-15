@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
-import { ArrowDown, Code2, Mail, MapPin, Network, Phone, Send } from "lucide-react";
+import { ArrowDown, Code2, FileText, Mail, MapPin, Network, Phone, Send } from "lucide-react";
 import { owner, stats } from "@/lib/data";
 
 const easeOutExpo = [0.16, 1, 0.3, 1] as const;
@@ -68,7 +68,7 @@ export default function Hero() {
             systems, and clean API integrations for SaaS dashboards and high-utility applications.
           </motion.p>
 
-          <motion.div variants={item} className="mt-9 flex flex-col gap-4 sm:flex-row">
+          <motion.div variants={item} className="mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
             <motion.a
               whileHover={{ y: -3, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -86,6 +86,17 @@ export default function Hero() {
             >
               Let&apos;s Connect
               <Send size={18} />
+            </motion.a>
+            <motion.a
+              whileHover={{ y: -3, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              href={owner.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-cyan-300/30 bg-cyan-300/10 px-6 py-3 text-sm font-bold text-cyan-100 backdrop-blur transition hover:border-cyan-300/60 hover:bg-cyan-300/20 hover:text-white"
+            >
+              View Resume
+              <FileText size={18} />
             </motion.a>
           </motion.div>
 
