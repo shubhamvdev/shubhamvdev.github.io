@@ -3,16 +3,16 @@
 
 :root {
   color-scheme: dark;
-  --background: #050507;
-  --background-mid: #090b12;
-  --background-end: #0b0912;
-  --surface-deep: #0b0d12;
-  --surface-soft: #11131a;
-  --foreground: #f5f7fb;
-  --accent: #38bdf8;
-  --accent-2: #8b5cf6;
-  --accent-rgb: 56, 189, 248;
-  --accent-2-rgb: 139, 92, 246;
+  --background: #030510;
+  --background-mid: #071027;
+  --background-end: #170a2d;
+  --surface-deep: #090b1d;
+  --surface-soft: #11142d;
+  --foreground: #f4f3ff;
+  --accent: #6674ff;
+  --accent-2: #a855f7;
+  --accent-rgb: 102, 116, 255;
+  --accent-2-rgb: 168, 85, 247;
   --font-body: "DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-heading: "Outfit", "DM Sans", ui-sans-serif, system-ui, sans-serif;
 }
@@ -254,6 +254,191 @@ select {
   display: inline-block;
   transform-origin: 50% 80%;
   will-change: transform, opacity, filter;
+}
+
+.hero-gradient-word {
+  color: transparent;
+  background: linear-gradient(105deg, var(--accent-2), var(--accent) 48%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.hero-orbit-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  isolation: isolate;
+}
+
+.hero-orbit-stage::before {
+  content: "";
+  position: absolute;
+  inset: 14%;
+  z-index: -3;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.32), rgba(var(--accent-2-rgb), 0.16) 45%, transparent 70%);
+  filter: blur(42px);
+  animation: orbit-glow 5s ease-in-out infinite;
+}
+
+.hero-orbit-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.hero-orbit-ring-one {
+  width: 88%;
+  height: 88%;
+  border: 1px solid rgba(var(--accent-rgb), 0.26);
+  box-shadow: inset 0 0 60px rgba(var(--accent-rgb), 0.05);
+}
+
+.hero-orbit-ring-two {
+  width: 93%;
+  height: 93%;
+  border: 1px dashed rgba(var(--accent-rgb), 0.2);
+  animation: orbit-spin 24s linear infinite;
+}
+
+.hero-orbit-grid {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 81%;
+  height: 81%;
+  overflow: hidden;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background:
+    linear-gradient(rgba(var(--accent-rgb), 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--accent-rgb), 0.06) 1px, transparent 1px),
+    radial-gradient(circle at center, rgba(var(--accent-rgb), 0.2), rgba(6, 7, 25, 0.92) 66%);
+  background-size: 30px 30px, 30px 30px, auto;
+  border: 1px solid rgba(var(--accent-rgb), 0.18);
+}
+
+.hero-orbit-photo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 72%;
+  height: 72%;
+  overflow: hidden;
+  border: 2px solid rgba(var(--accent-rgb), 0.44);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--surface-deep);
+  box-shadow:
+    0 35px 90px rgba(0, 0, 0, 0.48),
+    0 0 55px rgba(var(--accent-rgb), 0.14);
+}
+
+.hero-orbit-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: saturate(0.94) contrast(1.03);
+}
+
+.hero-orbit-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(var(--accent-rgb), 0.04), transparent 50%),
+    linear-gradient(0deg, rgba(3, 5, 16, 0.42), transparent 34%);
+}
+
+.hero-skill-badge {
+  position: absolute;
+  z-index: 5;
+  display: grid;
+  width: 74px;
+  height: 74px;
+  place-items: center;
+  border: 1px solid rgba(var(--accent-rgb), 0.34);
+  border-radius: 50%;
+  background: rgba(9, 11, 29, 0.76);
+  color: color-mix(in srgb, var(--accent) 75%, white);
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(16px);
+}
+
+.hero-skill-react {
+  right: 1%;
+  top: 16%;
+}
+
+.hero-skill-api {
+  bottom: 13%;
+  left: 0;
+}
+
+.hero-skill-next {
+  left: 4%;
+  top: 11%;
+}
+
+.hero-code-card {
+  position: absolute;
+  bottom: 4%;
+  right: 0;
+  z-index: 6;
+  min-width: 270px;
+  border: 1px solid rgba(var(--accent-rgb), 0.24);
+  border-radius: 10px;
+  background: rgba(8, 10, 28, 0.88);
+  padding: 13px 18px;
+  color: #cbd5e1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px);
+}
+
+.hero-code-card span {
+  margin-right: 14px;
+  color: #64748b;
+}
+
+@keyframes orbit-spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes orbit-glow {
+  0%, 100% { opacity: 0.58; transform: scale(0.94); }
+  50% { opacity: 0.9; transform: scale(1.06); }
+}
+
+@media (max-width: 639px) {
+  .hero-orbit-stage {
+    max-width: 350px;
+    margin-inline: auto;
+  }
+
+  .hero-skill-badge {
+    width: 58px;
+    height: 58px;
+    font-size: 10px;
+  }
+
+  .hero-skill-next {
+    display: none;
+  }
+
+  .hero-code-card {
+    right: 50%;
+    bottom: 0;
+    min-width: 235px;
+    transform: translateX(50%);
+    font-size: 9px;
+  }
 }
 
 .profile-portrait {
@@ -660,6 +845,8 @@ select {
   .bg-radial-fade::after,
   .soft-grid,
   .gradient-text,
+  .hero-orbit-stage::before,
+  .hero-orbit-ring-two,
   .profile-portrait,
   .profile-portrait-glow,
   .profile-photo-shine {
