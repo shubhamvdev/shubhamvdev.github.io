@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { ArrowUpRight, Check, Mail, Menu, Palette, X } from "lucide-react";
 import { navItems, owner } from "@/lib/data";
 
 export default function Navbar() {
+  const navbarRef = useRef<HTMLElement>(null);
+  const themePickerRef = useRef<HTMLDivElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [themeMenuOpen, setThemeMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -40,6 +42,36 @@ export default function Navbar() {
     document.documentElement.dataset.theme = initialTheme;
   }, []);
 
+  useEffect(() => {
+    if (!themeMenuOpen && !mobileMenuOpen) return;
+
+    const closeOnOutsidePress = (event: PointerEvent) => {
+      const target = event.target as Node;
+
+      if (themeMenuOpen && !themePickerRef.current?.contains(target)) {
+        setThemeMenuOpen(false);
+      }
+
+      if (mobileMenuOpen && !navbarRef.current?.contains(target)) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setThemeMenuOpen(false);
+      setMobileMenuOpen(false);
+    };
+
+    document.addEventListener("pointerdown", closeOnOutsidePress);
+    document.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.removeEventListener("pointerdown", closeOnOutsidePress);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [mobileMenuOpen, themeMenuOpen]);
+
   const selectTheme = (nextTheme: string) => {
     setTheme(nextTheme);
     document.documentElement.dataset.theme = nextTheme;
@@ -49,6 +81,7 @@ export default function Navbar() {
 
   return (
     <motion.header
+      ref={navbarRef}
       initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.55, ease: "easeOut" }}
@@ -89,7 +122,7 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="relative">
+          <div ref={themePickerRef} className="relative">
             <button
               type="button"
               aria-label="Choose color theme"
@@ -189,7 +222,7 @@ export default function Navbar() {
               onClick={() => setMobileMenuOpen(false)}
               className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-bold text-white"
             >
-              View résumé
+              View resume
               <ArrowUpRight size={16} />
             </a>
             <a

@@ -116,7 +116,7 @@ export default function Hero() {
               <ArrowRight size={17} />
             </motion.a>
             <motion.a whileHover={{ y: -3 }} whileTap={{ scale: 0.98 }} href={owner.resume} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/[0.025] px-6 py-4 text-sm font-bold text-white transition hover:bg-white/[0.07]">
-              View résumé
+              View resume
               <ArrowUpRight size={17} />
             </motion.a>
             <motion.a whileHover={{ y: -3 }} whileTap={{ scale: 0.98 }} href={`mailto:${owner.email}`} className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/[0.015] px-6 py-4 text-sm font-bold text-slate-200 transition hover:border-white/20 hover:text-white">
