@@ -26,6 +26,10 @@ export default function Navbar() {
         isScrolled ? "liquid-nav-scrolled" : "liquid-nav-top"
       }`}
     >
+      <div className="liquid-glass-layer" aria-hidden="true">
+        <span className="liquid-blob liquid-blob-cyan" />
+        <span className="liquid-blob liquid-blob-violet" />
+      </div>
       <nav className="relative z-10 mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a
           href="#home"
